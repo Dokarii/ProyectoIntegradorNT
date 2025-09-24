@@ -1,0 +1,20 @@
+{
+  "user_id": "e87f9d7c86f4",
+  "username": "user_003",
+  "email": "user003@plataforma.com",
+  "age": 16,
+  "gender": "Masculino",
+  "location": "Cali",
+  "registration_date": "2025-09-24T13:05:46.661892",
+  "emotional_profile": {
+    "stress_level": 10,
+    "anxiety_level": 10,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

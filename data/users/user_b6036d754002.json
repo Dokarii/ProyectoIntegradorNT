@@ -1,0 +1,20 @@
+{
+  "user_id": "b6036d754002",
+  "username": "user_011",
+  "email": "user011@plataforma.com",
+  "age": 22,
+  "gender": "Femenino",
+  "location": "Barranquilla",
+  "registration_date": "2025-09-24T13:06:21.010826",
+  "emotional_profile": {
+    "stress_level": 9,
+    "anxiety_level": 7,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

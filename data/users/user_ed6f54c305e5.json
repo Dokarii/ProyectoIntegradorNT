@@ -1,0 +1,20 @@
+{
+  "user_id": "ed6f54c305e5",
+  "username": "user_013",
+  "email": "user013@plataforma.com",
+  "age": 19,
+  "gender": "Masculino",
+  "location": "Medellín",
+  "registration_date": "2025-09-24T13:06:21.019267",
+  "emotional_profile": {
+    "stress_level": 3,
+    "anxiety_level": 6,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

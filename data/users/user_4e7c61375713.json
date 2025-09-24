@@ -1,0 +1,20 @@
+{
+  "user_id": "4e7c61375713",
+  "username": "user_004",
+  "email": "user004@plataforma.com",
+  "age": 20,
+  "gender": "No binario",
+  "location": "Bucaramanga",
+  "registration_date": "2025-09-24T13:07:14.950596",
+  "emotional_profile": {
+    "stress_level": 1,
+    "anxiety_level": 1,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

@@ -1,0 +1,20 @@
+{
+  "user_id": "bfd6dbcf70b4",
+  "username": "user_009",
+  "email": "user009@plataforma.com",
+  "age": 21,
+  "gender": "Masculino",
+  "location": "Cartagena",
+  "registration_date": "2025-09-24T13:05:46.683125",
+  "emotional_profile": {
+    "stress_level": 6,
+    "anxiety_level": 5,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

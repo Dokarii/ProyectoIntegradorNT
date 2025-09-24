@@ -1,0 +1,20 @@
+{
+  "user_id": "84f43ff00ac6",
+  "username": "user_012",
+  "email": "user012@plataforma.com",
+  "age": 18,
+  "gender": "Prefiero no decir",
+  "location": "Medellín",
+  "registration_date": "2025-09-24T13:06:21.014037",
+  "emotional_profile": {
+    "stress_level": 5,
+    "anxiety_level": 9,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

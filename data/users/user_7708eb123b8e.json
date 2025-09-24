@@ -1,0 +1,20 @@
+{
+  "user_id": "7708eb123b8e",
+  "username": "user_010",
+  "email": "user010@plataforma.com",
+  "age": 24,
+  "gender": "No binario",
+  "location": "Bogotá",
+  "registration_date": "2025-09-24T13:07:14.973086",
+  "emotional_profile": {
+    "stress_level": 5,
+    "anxiety_level": 2,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

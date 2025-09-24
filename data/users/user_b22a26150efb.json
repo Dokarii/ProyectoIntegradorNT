@@ -1,0 +1,20 @@
+{
+  "user_id": "b22a26150efb",
+  "username": "user_013",
+  "email": "user013@plataforma.com",
+  "age": 23,
+  "gender": "Masculino",
+  "location": "Medellín",
+  "registration_date": "2025-09-24T13:05:46.703273",
+  "emotional_profile": {
+    "stress_level": 9,
+    "anxiety_level": 5,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

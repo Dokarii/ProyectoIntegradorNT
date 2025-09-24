@@ -1,0 +1,20 @@
+{
+  "user_id": "5c4c86daa1b6",
+  "username": "user_006",
+  "email": "user006@plataforma.com",
+  "age": 18,
+  "gender": "Prefiero no decir",
+  "location": "Bogotá",
+  "registration_date": "2025-09-24T13:06:20.989620",
+  "emotional_profile": {
+    "stress_level": 3,
+    "anxiety_level": 8,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

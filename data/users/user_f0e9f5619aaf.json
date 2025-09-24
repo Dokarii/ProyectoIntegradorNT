@@ -1,0 +1,20 @@
+{
+  "user_id": "f0e9f5619aaf",
+  "username": "user_011",
+  "email": "user011@plataforma.com",
+  "age": 25,
+  "gender": "Prefiero no decir",
+  "location": "Cartagena",
+  "registration_date": "2025-09-24T13:07:14.977414",
+  "emotional_profile": {
+    "stress_level": 6,
+    "anxiety_level": 9,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}
