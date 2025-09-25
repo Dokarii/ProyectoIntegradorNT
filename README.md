@@ -23,7 +23,7 @@ Desarrollar una herramienta tecnológica que permita:
 
 ```
 Proyecto_Integrador/
-├── docs/                          # Documentación del proyecto
+├── docs/                         # Documentación del proyecto
 │   ├── PLANEACION_PROYECTO.md    # Documento de planeación
 │   └── informe_tecnico.md        # Informe técnico
 ├── src/                          # Código fuente
