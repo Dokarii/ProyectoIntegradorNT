@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+
+{% block title %}{{ survey.title }} - Plataforma de Bienestar Emocional{% endblock %}
+
+{% block extra_head %}
+<style>
+    .question-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+    }
+    
+    .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .question-number {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 15px;
+    }
+    
+    .form-check-input:checked {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    
+    .progress-bar {
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        transition: width 0.3s ease;
+    }
+    
+    .btn-submit {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Header de la encuesta -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body text-center">
+                    <h1 class="display-5 mb-3">
+                        <i class="fas fa-clipboard-list text-primary me-3"></i>
+                        {{ survey.title }}
+                    </h1>
+                    <p class="lead text-muted">{{ survey.description }}</p>
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fas fa-clock text-info me-2"></i>
+                                <span><strong>{{ survey.estimated_duration }}</strong> minutos</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fas fa-question-circle text-warning me-2"></i>
+                                <span><strong>{{ survey.questions|length }}</strong> preguntas</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fas fa-shield-alt text-success me-2"></i>
+                                <span><strong>Confidencial</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="progress" style="height: 8px; border-radius: 10px;">
+                <div class="progress-bar" role="progressbar" style="width: 0%" id="progressBar"></div>
+            </div>
+            <small class="text-muted mt-2 d-block text-center">
+                Pregunta <span id="currentQuestion">1</span> de {{ survey.questions|length }}
+            </small>
+        </div>
+    </div>
+
+    <!-- Formulario de encuesta -->
+    <form method="POST" id="surveyForm">
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+        
+        {% for question in survey.questions %}
+        <div class="question-card card mb-4" data-question="{{ loop.index }}">
+            <div class="card-body">
+                <div class="d-flex align-items-start">
+                    <div class="question-number">{{ loop.index }}</div>
+                    <div class="flex-grow-1">
+                        <h5 class="card-title mb-3">{{ question.text }}</h5>
+                        
+                        {% if question.type == 'multiple_choice' %}
+                            {% for option in question.options %}
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" 
+                                       name="question_{{ question.id }}" 
+                                       id="q{{ question.id }}_{{ loop.index }}" 
+                                       value="{{ option }}" required>
+                                <label class="form-check-label" for="q{{ question.id }}_{{ loop.index }}">
+                                    {{ option }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        
+                        {% elif question.type == 'scale' %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="form-label">Selecciona un valor del 1 al {{ question.scale_max }}:</label>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        {% for i in range(1, question.scale_max + 1) %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" 
+                                                   name="question_{{ question.id }}" 
+                                                   id="q{{ question.id }}_{{ i }}" 
+                                                   value="{{ i }}" required>
+                                            <label class="form-check-label text-center d-block" for="q{{ question.id }}_{{ i }}">
+                                                {{ i }}
+                                            </label>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <small class="text-muted">{{ question.scale_labels[0] if question.scale_labels else 'Mínimo' }}</small>
+                                        <small class="text-muted">{{ question.scale_labels[1] if question.scale_labels and question.scale_labels|length > 1 else 'Máximo' }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {% elif question.type == 'text' %}
+                            <div class="mb-3">
+                                <textarea class="form-control" name="question_{{ question.id }}" 
+                                         rows="3" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                            </div>
+                        
+                        {% elif question.type == 'yes_no' %}
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" 
+                                       name="question_{{ question.id }}" 
+                                       id="q{{ question.id }}_yes" 
+                                       value="Sí" required>
+                                <label class="form-check-label" for="q{{ question.id }}_yes">
+                                    <i class="fas fa-check text-success me-2"></i>Sí
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" 
+                                       name="question_{{ question.id }}" 
+                                       id="q{{ question.id }}_no" 
+                                       value="No" required>
+                                <label class="form-check-label" for="q{{ question.id }}_no">
+                                    <i class="fas fa-times text-danger me-2"></i>No
+                                </label>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Botón de envío -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-success btn-lg btn-submit">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Enviar Encuesta
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Información adicional -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="alert alert-info border-0 shadow-sm">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-info-circle fa-2x text-info me-3"></i>
+                    <div>
+                        <h6 class="alert-heading mb-1">Información importante</h6>
+                        <p class="mb-0">
+                            Tus respuestas son completamente confidenciales y se utilizarán únicamente 
+                            para fines de investigación y mejora del bienestar estudiantil.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('surveyForm');
+    const questions = document.querySelectorAll('.question-card');
+    const progressBar = document.getElementById('progressBar');
+    const currentQuestionSpan = document.getElementById('currentQuestion');
+    const totalQuestions = questions.length;
+    
+    // Función para actualizar el progreso
+    function updateProgress() {
+        let answeredQuestions = 0;
+        
+        questions.forEach((question, index) => {
+            const questionInputs = question.querySelectorAll('input[type="radio"], textarea');
+            let isAnswered = false;
+            
+            questionInputs.forEach(input => {
+                if (input.type === 'radio' && input.checked) {
+                    isAnswered = true;
+                } else if (input.type === 'textarea' && input.value.trim() !== '') {
+                    isAnswered = true;
+                }
+            });
+            
+            if (isAnswered) {
+                answeredQuestions++;
+            }
+        });
+        
+        const progress = (answeredQuestions / totalQuestions) * 100;
+        progressBar.style.width = progress + '%';
+        currentQuestionSpan.textContent = answeredQuestions;
+    }
+    
+    // Agregar event listeners a todos los inputs
+    questions.forEach(question => {
+        const inputs = question.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('change', updateProgress);
+            input.addEventListener('input', updateProgress);
+        });
+    });
+    
+    // Validación del formulario
+    form.addEventListener('submit', function(e) {
+        const requiredInputs = form.querySelectorAll('input[required], textarea[required]');
+        let allAnswered = true;
+        
+        // Verificar que todas las preguntas requeridas estén respondidas
+        const questionGroups = {};
+        requiredInputs.forEach(input => {
+            const questionName = input.name;
+            if (!questionGroups[questionName]) {
+                questionGroups[questionName] = [];
+            }
+            questionGroups[questionName].push(input);
+        });
+        
+        for (const questionName in questionGroups) {
+            const inputs = questionGroups[questionName];
+            let questionAnswered = false;
+            
+            inputs.forEach(input => {
+                if (input.type === 'radio' && input.checked) {
+                    questionAnswered = true;
+                } else if (input.type === 'textarea' && input.value.trim() !== '') {
+                    questionAnswered = true;
+                }
+            });
+            
+            if (!questionAnswered) {
+                allAnswered = false;
+                break;
+            }
+        }
+        
+        if (!allAnswered) {
+            e.preventDefault();
+            showToast('Por favor, responde todas las preguntas antes de enviar.', 'warning');
+            return;
+        }
+        
+        // Mostrar loading
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...';
+        submitBtn.disabled = true;
+        
+        // Restaurar botón si hay error (el formulario se enviará normalmente si todo está bien)
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 5000);
+    });
+    
+    // Función para mostrar notificaciones
+    function showToast(message, type = 'info') {
+        // Crear toast element
+        const toast = document.createElement('div');
+        toast.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        toast.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(toast);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 5000);
+    }
+    
+    // Inicializar progreso
+    updateProgress();
+});
+</script>
+{% endblock %}

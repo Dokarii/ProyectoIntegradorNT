@@ -364,6 +364,15 @@ class UserManager:
             gender = user.gender
             distribution[gender] = distribution.get(gender, 0) + 1
         return distribution
+    
+    def get_all_users(self) -> List[User]:
+        """
+        Obtiene todos los usuarios registrados.
+        
+        Returns:
+            List[User]: Lista de todos los usuarios
+        """
+        return list(self.users.values())
 
 
 def simulate_user_registration(num_users: int = 10) -> List[User]:

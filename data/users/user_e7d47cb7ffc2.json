@@ -1,0 +1,20 @@
+{
+  "user_id": "e7d47cb7ffc2",
+  "username": "user_003",
+  "email": "user003@plataforma.com",
+  "age": 20,
+  "gender": "Prefiero no decir",
+  "location": "Barranquilla",
+  "registration_date": "2025-09-24T13:12:51.389216",
+  "emotional_profile": {
+    "stress_level": 2,
+    "anxiety_level": 8,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Registro - Plataforma de Bienestar Emocional{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center">
+                <h3 class="mb-0">
+                    <i class="fas fa-user-plus"></i> Registro de Usuario
+                </h3>
+                <p class="mb-0 mt-2">Únete a nuestra comunidad de bienestar</p>
+            </div>
+            
+            <div class="card-body p-4">
+                <form method="POST" id="registroForm" novalidate>
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">
+                            <i class="fas fa-user"></i> Nombre de Usuario
+                        </label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="username" 
+                               name="username" 
+                               required 
+                               minlength="3" 
+                               maxlength="20"
+                               pattern="[a-zA-Z0-9_]+"
+                               placeholder="Ej: juan_123">
+                        <div class="form-text">
+                            3-20 caracteres. Solo letras, números y guión bajo.
+                        </div>
+                        <div class="invalid-feedback">
+                            Por favor ingresa un nombre de usuario válido.
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i> Correo Electrónico
+                        </label>
+                        <input type="email" 
+                               class="form-control" 
+                               id="email" 
+                               name="email" 
+                               required
+                               placeholder="tu.email@ejemplo.com">
+                        <div class="invalid-feedback">
+                            Por favor ingresa un correo electrónico válido.
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="mb-3">
+                        <label for="age" class="form-label">
+                            <i class="fas fa-birthday-cake"></i> Edad
+                        </label>
+                        <input type="number" 
+                               class="form-control" 
+                               id="age" 
+                               name="age" 
+                               required 
+                               min="13" 
+                               max="25"
+                               placeholder="Ej: 18">
+                        <div class="form-text">
+                            Edad entre 13 y 25 años.
+                        </div>
+                        <div class="invalid-feedback">
+                            Por favor ingresa una edad válida (13-25 años).
+                        </div>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">
+                            <i class="fas fa-venus-mars"></i> Género
+                        </label>
+                        <select class="form-select" id="gender" name="gender" required>
+                            <option value="">Selecciona tu género</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="no_binario">No binario</option>
+                            <option value="prefiero_no_decir">Prefiero no decir</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor selecciona una opción.
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="mb-4">
+                        <label for="location" class="form-label">
+                            <i class="fas fa-map-marker-alt"></i> Ubicación
+                        </label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="location" 
+                               name="location" 
+                               required
+                               placeholder="Ej: Bogotá, Colombia">
+                        <div class="form-text">
+                            Ciudad y país donde resides.
+                        </div>
+                        <div class="invalid-feedback">
+                            Por favor ingresa tu ubicación.
+                        </div>
+                    </div>
+
+                    <!-- Privacy Notice -->
+                    <div class="alert alert-info">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>Privacidad:</strong> Tus datos están protegidos y solo se usan para 
+                        mejorar tu experiencia en la plataforma. No compartimos información personal.
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="card-footer text-center bg-light">
+                <small class="text-muted">
+                    ¿Ya tienes cuenta? 
+                    <a href="{{ url_for('encuestas') }}" class="text-decoration-none">
+                        Ir a encuestas
+                    </a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Validación del formulario
+(function() {
+    'use strict';
+    
+    const form = document.getElementById('registroForm');
+    
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        
+        form.classList.add('was-validated');
+    });
+    
+    // Validación en tiempo real del username
+    const usernameInput = document.getElementById('username');
+    usernameInput.addEventListener('input', function() {
+        const value = this.value;
+        const pattern = /^[a-zA-Z0-9_]+$/;
+        
+        if (value.length >= 3 && value.length <= 20 && pattern.test(value)) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+        } else {
+            this.classList.remove('is-valid');
+            if (value.length > 0) {
+                this.classList.add('is-invalid');
+            }
+        }
+    });
+    
+    // Validación en tiempo real del email
+    const emailInput = document.getElementById('email');
+    emailInput.addEventListener('input', function() {
+        const value = this.value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (emailPattern.test(value)) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+        } else {
+            this.classList.remove('is-valid');
+            if (value.length > 0) {
+                this.classList.add('is-invalid');
+            }
+        }
+    });
+    
+    // Validación en tiempo real de la edad
+    const ageInput = document.getElementById('age');
+    ageInput.addEventListener('input', function() {
+        const value = parseInt(this.value);
+        
+        if (value >= 13 && value <= 25) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+        } else {
+            this.classList.remove('is-valid');
+            if (this.value.length > 0) {
+                this.classList.add('is-invalid');
+            }
+        }
+    });
+})();
+</script>
+{% endblock %}

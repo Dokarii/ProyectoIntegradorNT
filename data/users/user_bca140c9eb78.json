@@ -1,0 +1,20 @@
+{
+  "user_id": "bca140c9eb78",
+  "username": "user_013",
+  "email": "user013@plataforma.com",
+  "age": 21,
+  "gender": "Masculino",
+  "location": "Medellín",
+  "registration_date": "2025-09-24T13:12:51.435425",
+  "emotional_profile": {
+    "stress_level": 4,
+    "anxiety_level": 10,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

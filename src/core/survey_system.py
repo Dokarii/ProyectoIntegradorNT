@@ -535,6 +535,24 @@ class SurveyManager:
                     return True
         
         return False
+    
+    def get_all_responses(self) -> List[SurveyResponse]:
+        """
+        Obtiene todas las respuestas de encuestas.
+        
+        Returns:
+            List[SurveyResponse]: Lista de todas las respuestas
+        """
+        return list(self.responses.values())
+    
+    def get_available_surveys(self) -> List[Survey]:
+        """
+        Obtiene todas las encuestas disponibles.
+        
+        Returns:
+            List[Survey]: Lista de todas las encuestas disponibles
+        """
+        return list(self.surveys.values())
 
 
 def simulate_survey_responses(num_responses: int = 20) -> None:

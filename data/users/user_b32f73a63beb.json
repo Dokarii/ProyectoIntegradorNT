@@ -1,0 +1,20 @@
+{
+  "user_id": "b32f73a63beb",
+  "username": "Dokarii",
+  "email": "ricardotejedor18@gmail.com",
+  "age": 18,
+  "gender": "masculino",
+  "location": "Medellín, Colombia",
+  "registration_date": "2025-09-24T15:39:11.423525",
+  "emotional_profile": {
+    "stress_level": 5,
+    "anxiety_level": 5,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": false
+}

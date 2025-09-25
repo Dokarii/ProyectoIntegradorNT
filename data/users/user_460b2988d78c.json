@@ -1,0 +1,20 @@
+{
+  "user_id": "460b2988d78c",
+  "username": "miguel298",
+  "email": "miguel53@email.com",
+  "age": 21,
+  "gender": "No binario",
+  "location": "Barranquilla",
+  "registration_date": "2025-09-24T13:14:23.538349",
+  "emotional_profile": {
+    "stress_level": 5,
+    "anxiety_level": 5,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

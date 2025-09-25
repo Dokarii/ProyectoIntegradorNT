@@ -1,0 +1,20 @@
+{
+  "user_id": "e8820f47cf67",
+  "username": "user_008",
+  "email": "user008@plataforma.com",
+  "age": 15,
+  "gender": "No binario",
+  "location": "Bucaramanga",
+  "registration_date": "2025-09-24T13:12:51.412858",
+  "emotional_profile": {
+    "stress_level": 3,
+    "anxiety_level": 10,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}

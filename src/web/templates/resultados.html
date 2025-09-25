@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+
+{% block title %}Resultados de Encuesta - Plataforma de Bienestar Emocional{% endblock %}
+
+{% block extra_head %}
+<style>
+    .result-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .result-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .success-icon {
+        font-size: 4rem;
+        color: #28a745;
+        animation: bounce 1s ease-in-out;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+    }
+    
+    .btn-action {
+        border-radius: 25px;
+        padding: 10px 25px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-action:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .stats-card {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .recommendation-card {
+        background: linear-gradient(135deg, #17a2b8, #138496);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Mensaje de éxito -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="result-card card border-0 shadow-lg">
+                <div class="card-body text-center py-5">
+                    <div class="success-icon mb-4">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h1 class="display-5 mb-3 text-success">¡Encuesta Completada!</h1>
+                    <p class="lead text-muted mb-4">
+                        Gracias por completar la encuesta. Tus respuestas han sido registradas exitosamente.
+                    </p>
+                    {% if response_id %}
+                    <div class="alert alert-info border-0 shadow-sm d-inline-block">
+                        <i class="fas fa-id-card me-2"></i>
+                        <strong>ID de Respuesta:</strong> {{ response_id }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas rápidas -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="stats-card">
+                <i class="fas fa-clock fa-2x mb-3"></i>
+                <h4>Tiempo Promedio</h4>
+                <p class="mb-0">5-8 minutos</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <i class="fas fa-users fa-2x mb-3"></i>
+                <h4>Participantes</h4>
+                <p class="mb-0">+1,200 estudiantes</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <i class="fas fa-chart-line fa-2x mb-3"></i>
+                <h4>Impacto</h4>
+                <p class="mb-0">Mejora continua</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Próximos pasos -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-route me-2"></i>
+                        ¿Qué sigue ahora?
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-success text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold">Completa más encuestas</h6>
+                                    <p class="text-muted mb-0">Ayúdanos a entender mejor tu bienestar emocional completando otras encuestas disponibles.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-info text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold">Revisa el dashboard</h6>
+                                    <p class="text-muted mb-0">Explora las estadísticas generales y tendencias de la comunidad estudiantil.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-warning text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold">Invita a otros</h6>
+                                    <p class="text-muted mb-0">Comparte la plataforma con otros estudiantes para crear una comunidad más fuerte.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-secondary text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold">Seguimiento regular</h6>
+                                    <p class="text-muted mb-0">Regresa periódicamente para hacer seguimiento a tu progreso y bienestar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recomendaciones -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="recommendation-card">
+                <h4 class="mb-3">
+                    <i class="fas fa-lightbulb me-2"></i>
+                    Recomendaciones para tu bienestar
+                </h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2"></i>
+                                Mantén una rutina de sueño regular
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2"></i>
+                                Practica técnicas de relajación
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2"></i>
+                                Mantén conexiones sociales saludables
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2"></i>
+                                Realiza actividad física regular
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2"></i>
+                                Busca apoyo cuando lo necesites
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2"></i>
+                                Celebra tus logros, por pequeños que sean
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('encuestas') }}" class="btn btn-primary btn-action me-3">
+                <i class="fas fa-clipboard-list me-2"></i>
+                Más Encuestas
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-info btn-action me-3">
+                <i class="fas fa-chart-bar me-2"></i>
+                Ver Dashboard
+            </a>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary btn-action">
+                <i class="fas fa-home me-2"></i>
+                Inicio
+            </a>
+        </div>
+    </div>
+
+    <!-- Información de contacto -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="alert alert-light border shadow-sm">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h6 class="alert-heading mb-1">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            ¿Necesitas ayuda o tienes preguntas?
+                        </h6>
+                        <p class="mb-0">
+                            Si tienes alguna pregunta sobre la encuesta o necesitas apoyo, 
+                            no dudes en contactar a nuestro equipo de bienestar estudiantil.
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <button class="btn btn-outline-primary btn-action">
+                            <i class="fas fa-envelope me-2"></i>
+                            Contactar Soporte
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animación de entrada para las tarjetas
+    const cards = document.querySelectorAll('.result-card, .stats-card, .card');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(20px)';
+                entry.target.style.transition = 'all 0.6s ease';
+                
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, 100);
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // Efecto de confeti (opcional)
+    function createConfetti() {
+        const colors = ['#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8'];
+        const confettiCount = 50;
+        
+        for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                top: -10px;
+                left: ${Math.random() * 100}vw;
+                z-index: 9999;
+                pointer-events: none;
+                border-radius: 50%;
+            `;
+            
+            document.body.appendChild(confetti);
+            
+            const animation = confetti.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 2000 + 1000,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            });
+            
+            animation.onfinish = () => {
+                confetti.remove();
+            };
+        }
+    }
+    
+    // Activar confeti al cargar la página
+    setTimeout(createConfetti, 500);
+});
+</script>
+{% endblock %}

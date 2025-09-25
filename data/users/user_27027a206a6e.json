@@ -1,0 +1,20 @@
+{
+  "user_id": "27027a206a6e",
+  "username": "sofia262",
+  "email": "sofia90@email.com",
+  "age": 23,
+  "gender": "No binario",
+  "location": "Medellín",
+  "registration_date": "2025-09-24T13:14:23.535608",
+  "emotional_profile": {
+    "stress_level": 5,
+    "anxiety_level": 5,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": false
+}

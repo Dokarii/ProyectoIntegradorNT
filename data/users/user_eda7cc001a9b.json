@@ -1,0 +1,20 @@
+{
+  "user_id": "eda7cc001a9b",
+  "username": "user_012",
+  "email": "user012@plataforma.com",
+  "age": 17,
+  "gender": "Femenino",
+  "location": "Bucaramanga",
+  "registration_date": "2025-09-24T13:12:51.431124",
+  "emotional_profile": {
+    "stress_level": 2,
+    "anxiety_level": 3,
+    "mood_stability": 5,
+    "social_support": 5,
+    "coping_skills": 5,
+    "risk_factors": [],
+    "protective_factors": []
+  },
+  "is_active": true,
+  "consent_given": true
+}
