@@ -158,6 +158,6 @@ Desarrollar una plataforma web integral que permita monitorear, analizar y apoya
 
 ---
 
-*Documento creado en: Enero 2025*
-*Versión: 1.0.0*
+*Documento creado en: Enero 2025* <br>
+*Versión: 1.0.0* <br>
 *Autor: Ricardo Tejedor - Simón Valencia*
