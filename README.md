@@ -23,7 +23,7 @@ Desarrollar una herramienta tecnológica que permita:
 
 ```
 Proyecto_Integrador/
-├── docs/                          # Documentación del proyecto
+├── docs/                         # Documentación del proyecto
 │   ├── PLANEACION_PROYECTO.md    # Documento de planeación
 │   └── informe_tecnico.md        # Informe técnico
 ├── src/                          # Código fuente
@@ -60,19 +60,15 @@ Proyecto_Integrador/
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/usuario/Proyecto_Integrador.git
-   cd Proyecto_Integrador
+   git clone https://github.com/Dokarii/ProyectoIntegradorNT.git
+   cd ProyectoIntegradorNT
    ```
 
 2. **Crear entorno virtual**
    ```bash
    python -m venv venv
    
-   # En Windows
    venv\Scripts\activate
-   
-   # En Linux/Mac
-   source venv/bin/activate
    ```
 
 3. **Instalar dependencias**
