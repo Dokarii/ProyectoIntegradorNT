@@ -33,21 +33,42 @@
                             <i class="fas fa-home"></i> Inicio
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('registro') }}">
-                            <i class="fas fa-user-plus"></i> Registro
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('encuestas') }}">
-                            <i class="fas fa-clipboard-list"></i> Encuestas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">
-                            <i class="fas fa-chart-bar"></i> Dashboard
-                        </a>
-                    </li>
+                    
+                    {% if 'user_id' in session %}
+                        <!-- Usuario logueado -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('encuestas') }}">
+                                <i class="fas fa-clipboard-list"></i> Encuestas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('dashboard') }}">
+                                <i class="fas fa-chart-bar"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user"></i> {{ session.get('username', 'Usuario') }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('logout') }}">
+                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                                </a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- Usuario no logueado -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('registro') }}">
+                                <i class="fas fa-user-plus"></i> Registro
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">
+                                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

@@ -131,6 +131,19 @@
                             </div>
                             {% endfor %}
                         
+                        {% elif question.type == 'likert_scale' %}
+                            {% for option in question.options %}
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" 
+                                       name="question_{{ question.question_id }}" 
+                                       id="q{{ question.question_id }}_{{ loop.index }}" 
+                                       value="{{ option }}" required>
+                                <label class="form-check-label" for="q{{ question.question_id }}_{{ loop.index }}">
+                                    {{ option }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        
                         {% elif question.type == 'scale' %}
                             <div class="row">
                                 <div class="col-12">
@@ -155,9 +168,9 @@
                                 </div>
                             </div>
                         
-                        {% elif question.type == 'text' %}
+                        {% elif question.type == 'text' or question.type == 'open_text' %}
                             <div class="mb-3">
-                                <textarea class="form-control" name="question_{{ question.id }}" 
+                                <textarea class="form-control" name="question_{{ question.question_id }}" 
                                          rows="3" placeholder="Escribe tu respuesta aquí..." required></textarea>
                             </div>
                         

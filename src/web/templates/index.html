@@ -12,8 +12,35 @@
             </h1>
             <p class="lead text-muted">
                 Un espacio seguro para cuidar tu salud mental y emocional. 
-                Regístrate, completa encuestas y recibe apoyo personalizado.
+                Inicia sesión o regístrate para comenzar tu evaluación personalizada.
             </p>
+            
+            <!-- Authentication Buttons -->
+            <div class="mt-4">
+                {% if session.logged_in %}
+                    <div class="alert alert-success d-inline-block">
+                        <i class="fas fa-user-check"></i> 
+                        Bienvenido de vuelta, {{ session.username }}!
+                    </div>
+                    <div class="mt-3">
+                        <a href="{{ url_for('encuestas', user_id=session.user_id) }}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-clipboard-list"></i> Ir a Encuestas
+                        </a>
+                        <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="mt-4">
+                        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                        </a>
+                        <a href="{{ url_for('registro') }}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
 
         <!-- Features Cards -->

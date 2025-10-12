@@ -92,7 +92,7 @@
                     </div>
 
                     <!-- Location -->
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label for="location" class="form-label">
                             <i class="fas fa-map-marker-alt"></i> Ubicación
                         </label>
@@ -107,6 +107,43 @@
                         </div>
                         <div class="invalid-feedback">
                             Por favor ingresa tu ubicación.
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">
+                            <i class="fas fa-lock"></i> Contraseña
+                        </label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="password" 
+                               name="password" 
+                               required
+                               minlength="6"
+                               placeholder="Mínimo 6 caracteres">
+                        <div class="form-text">
+                            La contraseña debe tener al menos 6 caracteres.
+                        </div>
+                        <div class="invalid-feedback">
+                            Por favor ingresa una contraseña válida (mínimo 6 caracteres).
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mb-4">
+                        <label for="confirm_password" class="form-label">
+                            <i class="fas fa-lock"></i> Confirmar Contraseña
+                        </label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="confirm_password" 
+                               name="confirm_password" 
+                               required
+                               minlength="6"
+                               placeholder="Repite tu contraseña">
+                        <div class="invalid-feedback">
+                            Las contraseñas no coinciden.
                         </div>
                     </div>
 
@@ -133,6 +170,26 @@
                         Ir a encuestas
                     </a>
                 </small>
+                
+                <!-- Divider -->
+                <hr class="my-4">
+
+                <!-- Login Link -->
+                <div class="text-center">
+                    <p class="text-muted mb-2">¿Ya tienes una cuenta?</p>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Iniciar Sesión
+                    </a>
+                </div>
+
+                <!-- Back to Home -->
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('index') }}" class="text-muted">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al Inicio
+                    </a>
+                </div>
             </div>
         </div>
     </div>
