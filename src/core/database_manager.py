@@ -8,6 +8,11 @@ from typing import Dict, List, Any, Optional, Tuple
 import json
 from datetime import datetime
 import logging
+import os
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv('config.env')
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
@@ -16,21 +21,24 @@ logger = logging.getLogger(__name__)
 class DatabaseManager:
     """Clase para gestionar todas las operaciones de base de datos MySQL."""
     
-    def __init__(self, host: str = 'localhost', database: str = 'bienestaremocional', 
-                 user: str = 'root', password: str = ''):
+    def __init__(self, host: str = None, database: str = None, 
+                 user: str = None, password: str = None, port: int = None):
         """
         Inicializa el gestor de base de datos.
+        Usa variables de entorno si no se proporcionan parámetros.
         
         Args:
             host: Servidor de base de datos
             database: Nombre de la base de datos
             user: Usuario de MySQL
             password: Contraseña de MySQL
+            port: Puerto de MySQL
         """
-        self.host = host
-        self.database = database
-        self.user = user
-        self.password = password
+        self.host = host or os.getenv('DB_HOST', 'localhost')
+        self.database = database or os.getenv('DB_NAME', 'bienestaremocional')
+        self.user = user or os.getenv('DB_USER', 'root')
+        self.password = password or os.getenv('DB_PASSWORD', '')
+        self.port = port or int(os.getenv('DB_PORT', 3306))
         self.connection = None
         
     def connect(self) -> bool:
@@ -46,6 +54,7 @@ class DatabaseManager:
                 database=self.database,
                 user=self.user,
                 password=self.password,
+                port=self.port,
                 charset='utf8mb4',
                 collation='utf8mb4_unicode_ci'
             )

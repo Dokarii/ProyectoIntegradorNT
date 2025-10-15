@@ -5,8 +5,8 @@
 {% block extra_head %}
 <style>
     .question-card {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         border: none;
+        color: #000000;
         border-radius: 15px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
@@ -20,7 +20,7 @@
     
     .question-number {
         background: linear-gradient(135deg, #007bff, #0056b3);
-        color: white;
+        color: rgb(0, 0, 0);
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -42,7 +42,7 @@
     }
     
     .btn-submit {
-        background: linear-gradient(135deg, #28a745, #20c997);
+        background: #007bff;
         border: none;
         padding: 12px 30px;
         border-radius: 25px;
@@ -50,10 +50,6 @@
         transition: all 0.3s ease;
     }
     
-    .btn-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
-    }
 </style>
 {% endblock %}
 
@@ -122,15 +118,14 @@
                             {% for option in question.options %}
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" 
-                                       name="question_{{ question.id }}" 
-                                       id="q{{ question.id }}_{{ loop.index }}" 
+                                       name="question_{{ question.question_id }}" 
+                                       id="q{{ question.question_id }}_{{ loop.index }}" 
                                        value="{{ option }}" required>
-                                <label class="form-check-label" for="q{{ question.id }}_{{ loop.index }}">
+                                <label class="form-check-label" for="q{{ question.question_id }}_{{ loop.index }}">
                                     {{ option }}
                                 </label>
                             </div>
                             {% endfor %}
-                        
                         {% elif question.type == 'likert_scale' %}
                             {% for option in question.options %}
                             <div class="form-check mb-2">
@@ -143,7 +138,6 @@
                                 </label>
                             </div>
                             {% endfor %}
-                        
                         {% elif question.type == 'scale' %}
                             <div class="row">
                                 <div class="col-12">
@@ -152,10 +146,10 @@
                                         {% for i in range(1, question.scale_max + 1) %}
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" 
-                                                   name="question_{{ question.id }}" 
-                                                   id="q{{ question.id }}_{{ i }}" 
+                                                   name="question_{{ question.question_id }}" 
+                                                   id="q{{ question.question_id }}_{{ i }}" 
                                                    value="{{ i }}" required>
-                                            <label class="form-check-label text-center d-block" for="q{{ question.id }}_{{ i }}">
+                                            <label class="form-check-label text-center d-block" for="q{{ question.question_id }}_{{ i }}">
                                                 {{ i }}
                                             </label>
                                         </div>
@@ -177,19 +171,19 @@
                         {% elif question.type == 'yes_no' %}
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" 
-                                       name="question_{{ question.id }}" 
-                                       id="q{{ question.id }}_yes" 
+                                       name="question_{{ question.question_id }}" 
+                                       id="q{{ question.question_id }}_yes" 
                                        value="Sí" required>
-                                <label class="form-check-label" for="q{{ question.id }}_yes">
+                                <label class="form-check-label" for="q{{ question.question_id }}_yes">
                                     <i class="fas fa-check text-success me-2"></i>Sí
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" 
-                                       name="question_{{ question.id }}" 
-                                       id="q{{ question.id }}_no" 
+                                       name="question_{{ question.question_id }}" 
+                                       id="q{{ question.question_id }}_no" 
                                        value="No" required>
-                                <label class="form-check-label" for="q{{ question.id }}_no">
+                                <label class="form-check-label" for="q{{ question.question_id }}_no">
                                     <i class="fas fa-times text-danger me-2"></i>No
                                 </label>
                             </div>

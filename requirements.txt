@@ -44,3 +44,6 @@ requests==2.31.0
 # Security
 bcrypt==4.0.1
 cryptography==41.0.4
+
+# MySQL Database
+mysql-connector-python==8.2.0

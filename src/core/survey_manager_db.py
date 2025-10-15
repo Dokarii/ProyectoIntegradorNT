@@ -361,34 +361,52 @@ class SurveyManagerDB:
             if not self.db_manager.connect():
                 print("Error: No se pudo conectar a la base de datos para guardar respuesta")
                 return False
+            
+            # Generar un ID único para la respuesta
+            import uuid
+            response_id = f"resp_{uuid.uuid4().hex[:12]}"
+            
+            # Crear la respuesta de encuesta con la firma correcta
+            response_created = self.db_manager.create_survey_response(
+                response_id=response_id,
+                user_id=user_id,
+                survey_id=survey_id,
+                duration_minutes=0.0
+            )
+            
+            if not response_created:
+                self.db_manager.disconnect()
+                return False
+            
+            # Guardar cada respuesta individual
+            for question_id, answer in responses.items():
+                # Intentar derivar un valor numérico si aplica
+                answer_numeric = None
+                try:
+                    if isinstance(answer, str) and answer.isdigit():
+                        answer_numeric = int(answer)
+                    elif isinstance(answer, (int, float)):
+                        answer_numeric = int(answer)
+                except Exception:
+                    answer_numeric = None
                 
-            # Crear la respuesta de encuesta
-            response_created = self.db_manager.create_survey_response(user_id, survey_id)
+                self.db_manager.create_question_answer(
+                    response_id=response_id,
+                    question_id=question_id,
+                    answer_value=str(answer),
+                    answer_numeric=answer_numeric
+                )
             
-            if response_created:
-                # Obtener el ID de la respuesta recién creada
-                response_data = self.db_manager.get_latest_survey_response(user_id, survey_id)
-                if response_data:
-                    response_id = response_data['id']
-                    
-                    # Guardar cada respuesta individual
-                    for question_id, answer in responses.items():
-                        self.db_manager.create_question_answer(
-                            response_id=response_id,
-                            question_id=question_id,
-                            answer=str(answer)
-                        )
-                    
-                    # Cerrar conexión
-                    self.db_manager.disconnect()
-                    return True
-            
-            # Cerrar conexión en caso de error
+            # Cerrar conexión
             self.db_manager.disconnect()
-            return False
+            return True
             
         except Exception as e:
             print(f"Error guardando respuesta: {e}")
+            try:
+                self.db_manager.disconnect()
+            except Exception:
+                pass
             return False
     
     def get_user_responses(self, user_id: str, survey_id: Optional[str] = None) -> List[Dict]:
@@ -403,7 +421,8 @@ class SurveyManagerDB:
             List[Dict]: Lista de respuestas del usuario
         """
         try:
-            return self.db_manager.get_user_responses(user_id, survey_id)
+            # Nota: DatabaseManager.get_user_responses solo acepta user_id
+            return self.db_manager.get_user_responses(user_id)
         except Exception as e:
             print(f"Error obteniendo respuestas del usuario: {e}")
             return []
